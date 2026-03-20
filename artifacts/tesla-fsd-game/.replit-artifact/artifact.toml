@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Tesla FSD Game"
+version = "1.0.0"
+id = "artifacts/tesla-fsd-game"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25778
+
+[services.development]
+run = "pnpm --filter @workspace/tesla-fsd-game run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tesla-fsd-game", "run", "build" ]
+publicDir = "artifacts/tesla-fsd-game/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25778"
+BASE_PATH = "/"
