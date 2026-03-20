@@ -3,39 +3,44 @@ export const PLAYER_LANE_INDEX = 1;
 export const ROAD_WIDTH = 16;
 export const ROAD_SEGMENT_LENGTH = 40;
 export const NUM_ROAD_SEGMENTS = 12;
-export const MAX_NPC_CARS = 12;
+export const MAX_NPC_CARS = 8;
 export const PLAYER_Z = 0;
-export const CAR_DETECTION_RANGE = 30;
-export const CHEVRON_COUNT = 5;
+export const CAR_DETECTION_RANGE = 35;
+
+// Scoring constants
+export const SCORE_SAFE_OVERTAKE = 10;
+export const SCORE_SMOOTH_LANE_CHANGE = 5;
+export const SCORE_NEAR_MISS = -15;
+export const SCORE_COLLISION = -50;
+
+// FSD confidence thresholds
+export const CONFIDENCE_DANGER_ZONE = 40;
+export const CONFIDENCE_WARNING_ZONE = 65;
+
+// NPC color palette — subtle variations for realism
+export const NPC_COLORS = {
+  sedan: ['#8a8a8a', '#7a8090', '#909090', '#7c7c7c', '#8c8478'],
+  suv:   ['#6a6a6a', '#606870', '#707070', '#686060', '#6a6878'],
+  truck: ['#484848', '#404850', '#505050', '#484040', '#484858'],
+};
 
 export const FSD_MESSAGES = [
   'Following lead vehicle',
   'Navigating to destination',
-  'Changing lanes for traffic',
-  'Waiting for pedestrian',
-  'Approaching intersection',
-  'Adjusting for traffic',
-  'Lane change in progress',
-  'Slowing for obstacle',
+  'Adjusting for traffic flow',
+  'Monitoring all road objects',
+  'Slowing for obstacle ahead',
   'Merging onto highway',
-  'Monitoring all objects',
+  'Evaluating lane change',
+  'Optimal path calculated',
+  'Scanning for pedestrians',
+  'Maintaining safe following distance',
+  'Traffic-aware cruise control active',
+  'Route recalculated',
 ];
 
 export const NAV_TARGETS = [
-  { name: "Palo Alto, CA", eta: "1:04 pm", distance: "0.5 mi", turn: "300 ft" },
-  { name: "Fremont Factory", eta: "2:30 pm", distance: "12.3 mi", turn: "0.2 mi" },
-  { name: "Mountain View, CA", eta: "3:15 pm", distance: "4.8 mi", turn: "500 ft" },
+  { name: 'Palo Alto, CA', eta: '1:04 pm', distance: '0.5 mi', turn: '300 ft' },
+  { name: 'Fremont Factory', eta: '2:30 pm', distance: '12.3 mi', turn: '0.2 mi' },
+  { name: 'Mountain View, CA', eta: '3:15 pm', distance: '4.8 mi', turn: '500 ft' },
 ];
-
-export const COLORS = {
-  road: '#e8e8e8',
-  roadLines: '#cccccc',
-  ground: '#f0f0f0',
-  playerCar: '#cc44ff',
-  npcCar: '#888888',
-  npcTruck: '#444444',
-  pathHighlight: '#4488ff',
-  chevronBlue: '#2277ee',
-  detected: '#3388ff',
-  sky: '#f5f5f5',
-};

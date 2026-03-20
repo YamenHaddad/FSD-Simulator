@@ -4,8 +4,24 @@ export interface CarData {
   z: number;
   speed: number;
   lane: number;
+  targetLane: number;
   type: 'sedan' | 'suv' | 'truck';
   detected: boolean;
+  braking: boolean;
+  changingLane: boolean;
+  color: string;
+}
+
+export interface ScoreEvent {
+  id: number;
+  value: number;
+  label: string;
+}
+
+export interface DecisionMoment {
+  type: 'overtake' | 'exit';
+  active: boolean;
+  timeLeft: number;
 }
 
 export interface GameState {
@@ -26,6 +42,11 @@ export interface GameState {
   obstacleDetected: boolean;
   crashed: boolean;
   gameOver: boolean;
+  fsdConfidence: number;
+  combo: number;
+  scoreEvents: ScoreEvent[];
+  nearMissActive: boolean;
+  decisionMoment: DecisionMoment | null;
 }
 
 export interface Lane {

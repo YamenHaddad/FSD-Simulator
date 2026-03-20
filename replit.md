@@ -91,6 +91,30 @@ Generated Zod schemas from the OpenAPI spec (e.g. `HealthCheckResponse`). Used b
 
 Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHealthCheck`, `healthCheck`).
 
+### `artifacts/tesla-fsd-game` (`@workspace/tesla-fsd-game`)
+
+Browser-based Tesla FSD-inspired driving simulation game. Renders via 2D Canvas with perspective projection (WebGL fallback auto-detected).
+
+**Architecture:**
+- `src/game/types.ts` — All TypeScript interfaces (`GameState`, `CarData`, `ScoreEvent`, `DecisionMoment`)
+- `src/game/constants.ts` — Game tuning constants, NPC color palettes, nav targets
+- `src/game/useGameState.ts` — Full gameplay engine: speed, FSD confidence, combo multiplier, score events, NPC dynamic behavior (braking, lane changes), collision detection, decision moments
+- `src/game/Canvas2DScene.tsx` — 2D canvas renderer: perspective projection, camera shake, fog, speed zoom, animated chevrons, NPC/player car drawing with shadows and brake lights
+- `src/game/Scene.tsx` — Wraps the renderer; detects WebGL availability and falls back to 2D canvas
+- `src/game/HUD.tsx` — Glassmorphic HUD: top bar, left speed/nav panel, right destination/confidence arc, floating score popups, decision moment overlay, controls
+- `src/pages/Game.tsx` — Main page: keyboard handling, game-over screen
+
+**Gameplay mechanics:**
+- FSD confidence (0–100%): decreases on near-miss/harsh events, slowly recovers when driving smoothly
+- Combo multiplier (×1–×8): grows with safe overtakes and smooth lane changes, resets on near-miss
+- Scoring: +10 safe overtake, +5 smooth lane change, -15 near miss, -50 collision (game over)
+- Decision moments every 10–15s: overtake vs stay, take exit vs continue
+- Dynamic NPC traffic: random braking (car slows to 40% speed), random lane changes
+
+**Visual features:** perspective-correct projection, camera shake at high speed, atmospheric fog, speed-based horizon rise (zoom), pulsing FSD path, animated chevrons, per-car color variation, brake light glow, ground shadows
+
+- `pnpm --filter @workspace/tesla-fsd-game run dev` — start dev server
+
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.
